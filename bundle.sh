@@ -35,8 +35,12 @@ mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 
 cp "$BIN/ExtSelector" "$APP/Contents/MacOS/ExtSelector"
 # Bundled resources produced by SPM (Catalog.json lives in the resource bundle).
+# This MUST sit at the .app root, NOT Contents/Resources: SPM's generated
+# `Bundle.module` accessor for an executable target looks only at
+# `Bundle.main.bundleURL/ExtSelector_ExtSelector.bundle` (the .app root). Put it
+# anywhere else and Catalog.load() fatal-errors on launch.
 if [ -d "$BIN/ExtSelector_ExtSelector.bundle" ]; then
-  cp -R "$BIN/ExtSelector_ExtSelector.bundle" "$APP/Contents/Resources/"
+  cp -R "$BIN/ExtSelector_ExtSelector.bundle" "$APP/ExtSelector_ExtSelector.bundle"
 fi
 # App icon (built from Resources/AppIcon.svg → AppIcon.icns).
 cp Resources/AppIcon.icns "$APP/Contents/Resources/AppIcon.icns"

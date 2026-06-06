@@ -1,0 +1,78 @@
+name: Release
+
+# Cut a release by pushing a tag:  git tag v1.2.3 && git push origin v1.2.3
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write   # create the GitHub Release and upload assets
+
+jobs:
+  release:
+    # macOS 26 runner — required: the app targets the macOS 26 SDK.
+    runs-on: macos-26
+    env:
+      # Job-level so the "Update Homebrew tap" step's `if:` can see it.
+      TAP_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # librsvg lets bundle.sh re-render the icon; without it the committed
+      # Resources/AppIcon.icns is used instead.
+      - name: Install librsvg
+        run: brew install librsvg
+
+      # Strip the leading "v" and validate the tag shape. Rejecting anything
+      # outside [0-9A-Za-z.+_-] keeps a crafted tag from injecting shell later.
+      - name: Derive version
+        id: ver
+        env:
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          version="${REF_NAME#v}"
+          if ! printf '%s' "$version" | grep -Eq '^[0-9][0-9A-Za-z.+_-]*$'; then
+            echo "::error::Invalid version tag: $REF_NAME"
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Build & package
+        id: pkg
+        env:
+          VERSION: ${{ steps.ver.outputs.version }}
+          BUILD: ${{ github.run_number }}
+        run: ./package.sh "$VERSION"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/ExtSelector-${{ steps.ver.outputs.version }}.zip
+            dist/ExtSelector-${{ steps.ver.outputs.version }}.zip.sha256
+          generate_release_notes: true
+
+      # Bump the cask in the personal tap. Requires a repo secret
+      # HOMEBREW_TAP_TOKEN: a PAT (classic, scope `repo`, or fine-grained with
+      # Contents:write on skyline69/homebrew-tap). Skipped if the secret is unset.
+      - name: Update Homebrew tap
+        if: env.TAP_TOKEN != ''
+        env:
+          VERSION: ${{ steps.ver.outputs.version }}
+          SHA256: ${{ steps.pkg.outputs.sha256 }}
+        run: |
+          set -euo pipefail
+          git clone "https://x-access-token:${TAP_TOKEN}@github.com/skyline69/homebrew-tap.git" tap
+          mkdir -p tap/Casks
+          sed -E \
+            -e "s|^  version \".*\"|  version \"${VERSION}\"|" \
+            -e "s|^  sha256 \".*\"|  sha256 \"${SHA256}\"|" \
+            Casks/ext-selector.rb > tap/Casks/ext-selector.rb
+          cd tap
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Casks/ext-selector.rb
+          git commit -m "ext-selector ${VERSION}" || { echo "No cask changes"; exit 0; }
+          git push

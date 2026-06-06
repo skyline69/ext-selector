@@ -1,0 +1,89 @@
+{
+  "categories": [
+    {
+      "id": "web-mail",
+      "name": "Web & Mail",
+      "sfSymbol": "globe",
+      "types": [
+        { "name": "Web Links (HTTPS)", "scheme": "https" },
+        { "name": "Web Links (HTTP)", "scheme": "http" },
+        { "name": "Email", "scheme": "mailto" },
+        { "name": "Calendar Subscriptions", "scheme": "webcal" },
+        { "name": "Phone Numbers", "scheme": "tel" },
+        { "name": "FTP Servers", "scheme": "ftp" }
+      ]
+    },
+    {
+      "id": "developer",
+      "name": "Developer",
+      "sfSymbol": "chevron.left.forwardslash.chevron.right",
+      "types": [
+        { "name": "Swift Source", "ext": "swift" },
+        { "name": "Python Script", "ext": "py", "uti": "public.python-script" },
+        { "name": "JavaScript", "ext": "js" },
+        { "name": "TypeScript", "ext": "ts" },
+        { "name": "JSON", "ext": "json", "uti": "public.json" },
+        { "name": "YAML", "ext": "yaml", "uti": "public.yaml" },
+        { "name": "Shell Script", "ext": "sh", "uti": "public.shell-script" },
+        { "name": "Markdown", "ext": "md", "uti": "net.daringfireball.markdown" },
+        { "name": "TOML", "ext": "toml" },
+        { "name": "C Source", "ext": "c", "uti": "public.c-source" },
+        { "name": "HTML", "ext": "html", "uti": "public.html" },
+        { "name": "CSS", "ext": "css", "uti": "public.css" }
+      ]
+    },
+    {
+      "id": "photos-videos",
+      "name": "Photos & Videos",
+      "sfSymbol": "photo.on.rectangle",
+      "types": [
+        { "name": "JPEG Image", "ext": "jpg", "uti": "public.jpeg" },
+        { "name": "PNG Image", "ext": "png", "uti": "public.png" },
+        { "name": "HEIC Image", "ext": "heic", "uti": "public.heic" },
+        { "name": "GIF Image", "ext": "gif", "uti": "com.compuserve.gif" },
+        { "name": "WebP Image", "ext": "webp", "uti": "org.webmproject.webp" },
+        { "name": "TIFF Image", "ext": "tiff", "uti": "public.tiff" },
+        { "name": "MPEG-4 Video", "ext": "mp4", "uti": "public.mpeg-4" },
+        { "name": "QuickTime Movie", "ext": "mov", "uti": "com.apple.quicktime-movie" },
+        { "name": "Matroska Video", "ext": "mkv" },
+        { "name": "AVI Video", "ext": "avi", "uti": "public.avi" }
+      ]
+    },
+    {
+      "id": "audio",
+      "name": "Audio",
+      "sfSymbol": "music.note",
+      "types": [
+        { "name": "MP3 Audio", "ext": "mp3", "uti": "public.mp3" },
+        { "name": "FLAC Audio", "ext": "flac", "uti": "org.xiph.flac" },
+        { "name": "WAV Audio", "ext": "wav", "uti": "com.microsoft.waveform-audio" },
+        { "name": "AAC Audio", "ext": "m4a", "uti": "public.mpeg-4-audio" },
+        { "name": "AIFF Audio", "ext": "aiff", "uti": "public.aiff-audio" }
+      ]
+    },
+    {
+      "id": "documents",
+      "name": "Documents",
+      "sfSymbol": "doc.text",
+      "types": [
+        { "name": "PDF Document", "ext": "pdf", "uti": "com.adobe.pdf" },
+        { "name": "Plain Text", "ext": "txt", "uti": "public.plain-text" },
+        { "name": "Rich Text", "ext": "rtf", "uti": "public.rtf" },
+        { "name": "CSV", "ext": "csv", "uti": "public.comma-separated-values-text" },
+        { "name": "EPUB Book", "ext": "epub", "uti": "org.idpf.epub-container" }
+      ]
+    },
+    {
+      "id": "archives",
+      "name": "Archives",
+      "sfSymbol": "archivebox",
+      "types": [
+        { "name": "ZIP Archive", "ext": "zip", "uti": "public.zip-archive" },
+        { "name": "TAR Archive", "ext": "tar", "uti": "public.tar-archive" },
+        { "name": "Gzip Archive", "ext": "gz", "uti": "org.gnu.gnu-zip-archive" },
+        { "name": "7-Zip Archive", "ext": "7z", "uti": "org.7-zip.7-zip-archive" },
+        { "name": "Disk Image", "ext": "dmg", "uti": "com.apple.disk-image-udif" }
+      ]
+    }
+  ]
+}

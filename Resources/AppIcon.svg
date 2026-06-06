@@ -1,0 +1,53 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Accent-blue squircle fill -->
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4F9CFF"/>
+      <stop offset="0.55" stop-color="#1E72F0"/>
+      <stop offset="1" stop-color="#0A55D8"/>
+    </linearGradient>
+    <!-- Top sheen -->
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.30"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Selected tile fill -->
+    <linearGradient id="sel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#EAF2FF"/>
+    </linearGradient>
+    <filter id="selGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="14" stdDeviation="22" flood-color="#001A4D" flood-opacity="0.35"/>
+    </filter>
+    <clipPath id="squircle">
+      <rect x="100" y="100" width="824" height="824" rx="185" ry="185"/>
+    </clipPath>
+  </defs>
+
+  <!-- Squircle background -->
+  <rect x="100" y="100" width="824" height="824" rx="185" ry="185" fill="url(#bg)"/>
+  <g clip-path="url(#squircle)">
+    <rect x="100" y="100" width="824" height="824" fill="url(#sheen)"/>
+  </g>
+
+  <!-- 3x3 grid of glass tiles; center one is the selected default -->
+  <g>
+    <!-- row 1 -->
+    <rect x="250" y="250" width="148" height="148" rx="34" fill="#ffffff" fill-opacity="0.20"/>
+    <rect x="438" y="250" width="148" height="148" rx="34" fill="#ffffff" fill-opacity="0.20"/>
+    <rect x="626" y="250" width="148" height="148" rx="34" fill="#ffffff" fill-opacity="0.20"/>
+    <!-- row 2 -->
+    <rect x="250" y="438" width="148" height="148" rx="34" fill="#ffffff" fill-opacity="0.20"/>
+    <!-- center: selected -->
+    <g filter="url(#selGlow)">
+      <rect x="430" y="430" width="164" height="164" rx="38" fill="url(#sel)"/>
+    </g>
+    <path d="M474 514 l24 24 l40 -52" fill="none" stroke="#1E72F0" stroke-width="20"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="626" y="438" width="148" height="148" rx="34" fill="#ffffff" fill-opacity="0.20"/>
+    <!-- row 3 -->
+    <rect x="250" y="626" width="148" height="148" rx="34" fill="#ffffff" fill-opacity="0.20"/>
+    <rect x="438" y="626" width="148" height="148" rx="34" fill="#ffffff" fill-opacity="0.20"/>
+    <rect x="626" y="626" width="148" height="148" rx="34" fill="#ffffff" fill-opacity="0.20"/>
+  </g>
+</svg>

@@ -1,0 +1,5 @@
+ExtSelector.app/
+.build/
+dist/
+*.iconset/
+.DS_Store

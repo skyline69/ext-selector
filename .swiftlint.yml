@@ -1,0 +1,76 @@
+# SwiftLint config for ExtSelector.
+# Run:  swiftlint            (lint)
+#       swiftlint --fix      (autocorrect)
+
+included:
+  - Sources
+  - Tests
+
+excluded:
+  - .build
+  - ExtSelector.app
+  - dist
+
+# Opt-in rules worth having on a small, modern Swift 6 codebase.
+opt_in_rules:
+  - empty_count
+  - empty_string
+  - first_where
+  - contains_over_first_not_nil
+  - last_where
+  - sorted_first_last
+  - operator_usage_whitespace
+  - closure_spacing
+  - closure_end_indentation
+  - collection_alignment
+  - explicit_init
+  - redundant_nil_coalescing
+  - redundant_type_annotation
+  - toggle_bool
+  - unneeded_parentheses_in_closure_argument
+  - vertical_whitespace_closing_braces
+  - yoda_condition
+  - modifier_order
+  - prefer_self_type_over_type_of_self
+  - fatal_error_message
+  - overridden_super_call
+  - joined_default_parameter
+  - literal_expression_end_indentation
+
+analyzer_rules:
+  - unused_declaration
+  - unused_import
+
+line_length:
+  warning: 150
+  error: 200
+  ignores_comments: true
+  ignores_urls: true
+
+# ContentView intentionally co-locates its child views (see CLAUDE.md). Thresholds
+# are set above the current size so growth still gets flagged.
+file_length:
+  warning: 850
+  error: 1200
+
+type_body_length:
+  warning: 450
+  error: 600
+
+function_body_length:
+  warning: 80
+  error: 120
+
+large_tuple:
+  warning: 3
+  error: 4
+
+identifier_name:
+  # Single-letter locals (i, n, p, …) read fine in tight closures/loops here.
+  min_length:
+    warning: 1
+  excluded: [id, x, y, ok, to]
+
+# These read fine as-is in this codebase.
+disabled_rules:
+  - todo
